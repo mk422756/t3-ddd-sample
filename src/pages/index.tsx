@@ -1,10 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
+import TweetCard from "../components/TweetCard";
 
 const Home: NextPage = () => {
   const tweets = api.tweet.getAll.useQuery();
@@ -18,31 +17,9 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <div className="container flex flex-col items-center justify-center gap-1 px-4 py-16">
-          <div className="card shadow-md">
-            <div className="m-5">
-              <div className="flex">
-                <div className="h-14 w-14 flex-none">
-                  <div className="avatar">
-                    <div className="w-12">
-                      <Image
-                        className="rounded-full"
-                        src="https://picsum.photos/200"
-                        alt="user image"
-                        fill
-                      ></Image>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-72 flex-initial break-words">
-                  <h2 className="font-semibold">user name</h2>
-                  <p>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {tweets.data?.map((tweet) => {
+            return <TweetCard key={tweet._text} text={tweet._text}></TweetCard>;
+          })}
         </div>
       </main>
     </>

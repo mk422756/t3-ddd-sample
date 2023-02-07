@@ -10,7 +10,6 @@ export default class GetTweetsUsecase {
 
   handle() {
     const tweets = this.tweetRepo.getAll();
-    console.log(1, tweets);
     return tweets;
   }
 }

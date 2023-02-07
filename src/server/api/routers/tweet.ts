@@ -15,7 +15,6 @@ export const tweetRouter = createTRPCRouter({
   getAll: publicProcedure.query(() => {
     const usecase = new GetTweetsUsecase();
     const ret = usecase.handle();
-    console.log(2, ret);
     return ret;
   }),
 
