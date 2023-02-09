@@ -1,4 +1,5 @@
 import type TweetRepo from "../domain/tweet-repo";
+import type TweetDto from "../dto/tweet-dto";
 import MockTweetRepo from "../infra/mock-tweet-repo";
 
 export default class GetTweetsUsecase {
@@ -8,8 +9,12 @@ export default class GetTweetsUsecase {
     this.tweetRepo = new MockTweetRepo();
   }
 
-  handle() {
-    const tweets = this.tweetRepo.getAll();
-    return tweets;
+  async handle(): Promise<TweetDto[]> {
+    const tweets = await this.tweetRepo.getAll();
+    return tweets.map((tweet) => {
+      return {
+        text: tweet.text,
+      };
+    });
   }
 }

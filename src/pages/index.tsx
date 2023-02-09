@@ -7,7 +7,6 @@ import TweetCard from "../components/TweetCard";
 
 const Home: NextPage = () => {
   const tweets = api.tweet.getAll.useQuery();
-  console.log(tweets);
   return (
     <>
       <Head>
@@ -18,7 +17,7 @@ const Home: NextPage = () => {
       <main>
         <div className="container flex flex-col items-center justify-center gap-1 px-4 py-16">
           {tweets.data?.map((tweet) => {
-            return <TweetCard key={tweet._text} text={tweet._text}></TweetCard>;
+            return <TweetCard key={tweet.text} text={tweet.text}></TweetCard>;
           })}
         </div>
       </main>
